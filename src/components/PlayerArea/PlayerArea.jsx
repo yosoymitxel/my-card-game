@@ -24,9 +24,12 @@ const PlayerArea = ({ playerId }) => {
     <div className={`player-area p-4 border-2 ${state.currentPlayer === playerId ? 'border-green-500 bg-green-100' : 'border-blue-500'} m-2 rounded-lg`}>
       <h2 className="text-xl font-bold">Jugador {playerId + 1}</h2>
       <div className="energy-counter text-lg">Energía: {player?.energy || 0}</div>
+      <div className='none'>
+        {player?.activeCard && <Card card={{ ...player.activeCard, owner: playerId }} isBattlefield />}
+      </div>
       <div className="hand grid grid-cols-3 gap-2 mt-4">
-        {player?.hand?.filter(card => card.name !== player.activeCard?.name).map((card, index) => (
-          <div key={index} onClick={() => handleCardClick(card)}>
+        {player?.hand?.filter(card => card && (!player.activeCard || card.name !== player.activeCard.name)).map((card, index) => (
+          <div key={index} onClick={() => handleCardClick(card)} className="cursor-pointer">
             <Card card={{ ...card, owner: playerId }} />
           </div>
         ))}

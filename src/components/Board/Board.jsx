@@ -20,7 +20,9 @@ const Board = () => {
   const handleAttack = (attack) => {
     dispatch({ type: 'ATTACK', attack });
     setTimeout(() => {
-      dispatch({ type: 'SWITCH_TURN' });
+      if (!opponentPlayer.activeCard) {
+        dispatch({ type: 'SWITCH_TURN' });
+      }
       setEnergyRecharged(false);
     }, 500); // Delay to show the animation
   };

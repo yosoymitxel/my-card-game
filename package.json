@@ -12,6 +12,8 @@
         "@fortawesome/fontawesome-svg-core": "^6.7.2",
         "@fortawesome/free-solid-svg-icons": "^6.7.2",
         "@fortawesome/react-fontawesome": "^0.2.2",
+        "@tailwindcss/postcss": "^4.0.0",
+        "@tailwindcss/postcss7-compat": "^2.2.17",
         "next": "latest",
         "react": "latest",
         "react-dom": "latest"
@@ -20,7 +22,7 @@
         "autoprefixer": "^10.4.20",
         "eslint": "latest",
         "eslint-config-next": "latest",
-        "postcss": "^8.5.1",
+        "postcss": "^7.0.39",
         "tailwindcss": "^4.0.0"
     }
 }

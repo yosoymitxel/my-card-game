@@ -119,11 +119,15 @@ const gameReducer = (state, action) => {
         return player;
       });
       const nextTurnPlayer = newHp > 0 ? state.currentPlayer : 1 - state.currentPlayer;
-      return {
+      const nextPlayerState = {
         ...state,
         currentPlayer: nextTurnPlayer,
         players: updatedPlayers
       };
+      if (newHp === 0) {
+        nextPlayerState.currentPlayer = 1 - state.currentPlayer;
+      }
+      return nextPlayerState;
     case 'RECHARGE_ENERGY':
       if (!state.players[state.currentPlayer].activeCard) {
         return state;
