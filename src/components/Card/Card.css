@@ -1,5 +1,5 @@
 .card {
-    border: 1px solid #ccc;
+    border: 2px solid;
     border-radius: 8px;
     padding: 10px;
     margin: 10px;
@@ -47,4 +47,34 @@
 
 .card .details {
     display: none;
+}
+
+.card.fuego {
+    border-color: #ff4500;
+    color: #ff4500;
+}
+
+.card.agua {
+    border-color: #1e90ff;
+    color: #1e90ff;
+}
+
+.card.tierra {
+    border-color: #8b4513;
+    color: #8b4513;
+}
+
+.card.eléctrico {
+    border-color: #ffd700;
+    color: #ffd700;
+}
+
+.card.oscuro {
+    border-color: #4b0082;
+    color: #4b0082;
+}
+
+.card.especial {
+    border-color: #32cd32;
+    color: #32cd32;
 }

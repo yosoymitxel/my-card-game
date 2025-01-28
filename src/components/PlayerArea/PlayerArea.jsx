@@ -12,11 +12,11 @@ const PlayerArea = ({ playerId }) => {
   }
 
   return (
-    <div className={`player-area ${state.currentPlayer === playerId ? 'active' : ''}`}>
-      <h2>Jugador {playerId + 1}</h2>
-      <div className="energy-counter">Energía: {player?.energy || 0}</div>
+    <div className={`player-area p-4 border-2 ${state.currentPlayer === playerId ? 'border-green-500 bg-green-100' : 'border-blue-500'} m-2 rounded-lg`}>
+      <h2 className="text-xl font-bold">Jugador {playerId + 1}</h2>
+      <div className="energy-counter text-lg">Energía: {player?.energy || 0}</div>
       {player?.activeMonster && <Card card={player.activeMonster} />}
-      <div className="hand">
+      <div className="hand grid grid-cols-3 gap-2 mt-4">
         {player?.hand?.map((card, index) => (
           <Card key={index} card={card} />
         ))}

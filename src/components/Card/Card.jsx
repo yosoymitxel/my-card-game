@@ -17,28 +17,30 @@ const Card = ({ card }) => {
     effect
   } = card;
 
+  const typeClass = type.toLowerCase();
+
   return (
-    <div className={`card ${type}`}>
-      <img src={image} alt={name} />
-      <div className="overlay">
-        <div className="top">
+    <div className={`card relative border border-gray-300 rounded-lg p-2 m-2 w-48 text-center ${typeClass}`}>
+      <img className="w-44 h-64 object-cover rounded-lg" src={image} alt={name} />
+      <div className="overlay absolute top-0 left-0 w-full h-full text-white text-xs flex flex-col justify-between p-2 box-border">
+        <div className="top flex justify-between bg-black bg-opacity-50 p-1 rounded">
           <span>{type}</span>
           {hp && <span><FontAwesomeIcon icon={faHeart} /> {hp}</span>}
           {usage && <span>{usage}</span>}
         </div>
-        <div className="bottom">
-          <h3>{name}</h3>
-          {attacks.map((attack, index) => (
-            <div key={index}>
-              <p>{attack.name}</p>
-              <p><FontAwesomeIcon icon={faBolt} /> {attack.energy_required}</p>
-              <p>Daño: {attack.damage}</p>
-              {attack.effect && <p>Efecto: {attack.effect}</p>}
-            </div>
-          ))}
+        <div className="bottom bg-black bg-opacity-50 p-1 rounded text-left">
+          <h3 className="text-sm font-bold">{name}</h3>
+          <div className="attacks flex flex-wrap justify-between">
+            {attacks.map((attack, index) => (
+              <div key={index} className="w-1/2">
+                <p><FontAwesomeIcon icon={faBolt} /> {attack.energy_required} | {attack.damage} {attack.name}</p>
+                {attack.effect && <p>Efecto: {attack.effect}</p>}
+              </div>
+            ))}
+          </div>
           {special_effects.length > 0 && (
             <div>
-              <h4>Efectos Especiales:</h4>
+              <h4 className="font-bold">Efectos Especiales:</h4>
               {special_effects.map((effect, index) => (
                 <p key={index}>{effect}</p>
               ))}
