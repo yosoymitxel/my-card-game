@@ -1,5 +1,5 @@
+// filepath: /c:/Users/Mitxel/Desktop/Proyectos de desarrollo/my-card-game/src/App.jsx
 import React from 'react';
-import './App.css';
 
 const App = () => {
   return (

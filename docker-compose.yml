@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000" # Mapea el puerto interno del contenedor al externo
+      - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
