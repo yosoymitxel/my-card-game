@@ -1,30 +1,140 @@
 {
-    "deck1": [
+  "types": ["Fuego", "Agua", "Tierra", "Eléctrico", "Oscuro"],
+  "cards": [
+    {
+      "name": "Dragón Ígneo",
+      "type": "Fuego",
+      "hp": 150,
+      "attacks": [
         {
-            "id": 1,
-            "name": "Dragón Ígneo",
-            "type": "fire",
-            "health": 150,
-            "energyCost": 3,
-            "damage": 40,
-            "effects": ["high_energy_damage"]
+          "name": "Llama Infernal",
+          "damage": 50,
+          "energy_required": 3
         },
         {
-            "id": 2,
-            "name": "Poción de Fuerza",
-            "type": "item",
-            "energyCost": 1,
-            "effects": ["one_time_use", "boost_damage"]
+          "name": "Explosión de Calor",
+          "damage": 70,
+          "energy_required": 4,
+          "effect": "El jugador pierde 1 energía después del ataque."
         }
-        ],
-        "deck2": [
+      ],
+      "special_effects": [
+        "Hace +10 de daño si el oponente tiene más de 5 energías."
+      ]
+    },
+    {
+      "name": "Tortuga Marina",
+      "type": "Agua",
+      "hp": 180,
+      "attacks": [
         {
-            "id": 3,
-            "name": "Tortuga Marina",
-            "type": "water",
-            "health": 180,
-            "energyCost": 4,
-            "damage": 35
+          "name": "Chorro de Agua",
+          "damage": 40,
+          "energy_required": 3
+        },
+        {
+          "name": "Maremoto",
+          "damage": 60,
+          "energy_required": 4,
+          "effect": "Reduce la energía del oponente en 1."
         }
-    ]
+      ],
+      "special_effects": [
+        "Hace +10 de daño si el oponente tiene más de 5 energías."
+      ]
+    },
+    {
+      "name": "Golem de Tierra",
+      "type": "Tierra",
+      "hp": 200,
+      "attacks": [
+        {
+          "name": "Golpe de Roca",
+          "damage": 30,
+          "energy_required": 2
+        },
+        {
+          "name": "Terremoto",
+          "damage": 50,
+          "energy_required": 4,
+          "effect": "El oponente pierde 2 energías."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño si el oponente tiene más de 5 energías."
+      ]
+    },
+    {
+      "name": "Rayo Eléctrico",
+      "type": "Eléctrico",
+      "hp": 120,
+      "attacks": [
+        {
+          "name": "Chispa",
+          "damage": 40,
+          "energy_required": 2
+        },
+        {
+          "name": "Tormenta Eléctrica",
+          "damage": 70,
+          "energy_required": 4,
+          "effect": "El oponente pierde 1 energía."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño si el oponente tiene más de 5 energías."
+      ]
+    },
+    {
+      "name": "Sombra Oscura",
+      "type": "Oscuro",
+      "hp": 140,
+      "attacks": [
+        {
+          "name": "Golpe Sombrío",
+          "damage": 50,
+          "energy_required": 3
+        },
+        {
+          "name": "Niebla Oscura",
+          "damage": 60,
+          "energy_required": 4,
+          "effect": "El oponente pierde 1 energía."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño si el oponente tiene más de 5 energías."
+      ]
+    },
+    {
+      "name": "Elixir Curativo",
+      "type": "Especial",
+      "usage": "Reutilizable",
+      "effect": "Cura 30 puntos de vida a un monstruo aliado."
+    },
+    {
+      "name": "Poción de Fuerza",
+      "type": "Especial",
+      "usage": "Reutilizable",
+      "effect": "Aumenta el daño de un ataque en 20 puntos."
+    },
+    {
+      "name": "Trampa de Energía",
+      "type": "Especial",
+      "usage": "Un solo uso",
+      "effect": "Reduce la energía del oponente en 2."
+    },
+    {
+      "name": "Escudo Protector",
+      "type": "Especial",
+      "usage": "Reutilizable",
+      "effect": "Reduce el daño recibido en 20 puntos durante un turno."
+    },
+    {
+      "name": "Trampa de Fuego",
+      "type": "Especial",
+      "usage": "Un solo uso",
+      "effect": "Inflige 30 puntos de daño al oponente."
+    }
+  ]
 }

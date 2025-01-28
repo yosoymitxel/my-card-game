@@ -8,6 +8,11 @@ Un juego de cartas estratégico basado en React
 2. `npm install`
 3. `npm start`
 
+##
+
+
+
+
 ## Características
 
 - Sistema de tipos con ventajas/debilidades
