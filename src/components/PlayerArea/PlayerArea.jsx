@@ -1,7 +1,7 @@
+// filepath: /c:/Users/Mitxel/Desktop/Proyectos de desarrollo/my-card-game/src/components/PlayerArea/PlayerArea.jsx
 import React from 'react';
 import Card from '../Card/Card';
 import { useGame } from '../../contexts/GameContext';
-import './PlayerArea.css';
 
 const PlayerArea = ({ playerId }) => {
   const { state } = useGame();

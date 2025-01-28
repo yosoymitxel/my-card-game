@@ -1,10 +1,14 @@
+// filepath: /c:/Users/Mitxel/Desktop/Proyectos de desarrollo/my-card-game/src/contexts/GameContext.jsx
 import React, { createContext, useContext, useReducer } from 'react';
 
 const GameContext = createContext();
 
 const initialState = {
   gameMode: null,
-  players: [],
+  players: [
+    { id: 0, energy: 0, activeMonster: null },
+    { id: 1, energy: 0, activeMonster: null }
+  ],
   currentPlayer: 0,
 };
 

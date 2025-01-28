@@ -1,7 +1,6 @@
 import React from 'react';
 import PlayerArea from '../PlayerArea/PlayerArea';
 import { useGame } from '../../contexts/GameContext';
-import './Board.css';
 
 const Board = () => {
   const { state } = useGame();

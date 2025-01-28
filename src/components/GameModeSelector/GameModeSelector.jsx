@@ -1,6 +1,5 @@
 import React from 'react';
 import { useGame } from '../../contexts/GameContext';
-import './GameModeSelector.css';
 
 const GameModeSelector = () => {
   const { dispatch } = useGame();

@@ -1,5 +1,4 @@
 import React from 'react';
-import './Card.css';
 
 const Card = ({ card }) => {
   if (!card) return null;
