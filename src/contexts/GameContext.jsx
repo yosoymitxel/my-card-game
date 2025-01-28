@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import { drawInitialHand } from '../utils/gameLogic';
+import { drawInitialHand, calculateDamage, rechargeEnergy } from '../utils/gameLogic';
 import cardsData from '../data/cards.json';
 
 const GameContext = createContext();
@@ -7,8 +7,8 @@ const GameContext = createContext();
 const initialState = {
   gameMode: null,
   players: [
-    { id: 0, energy: 0, activeMonster: null, hand: [], deck: [] },
-    { id: 1, energy: 0, activeMonster: null, hand: [], deck: [] }
+    { id: 0, energy: 0, activeMonster: null, hand: [], deck: [], battlefield: null },
+    { id: 1, energy: 0, activeMonster: null, hand: [], deck: [], battlefield: null }
   ],
   currentPlayer: 0,
 };
@@ -45,6 +45,38 @@ const gameReducer = (state, action) => {
         currentPlayer: 1 - currentPlayer,
         players: state.players.map((player, index) => 
           index === currentPlayer ? { ...player, hand: [...player.hand, newCard] } : player
+        )
+      };
+    case 'SELECT_CARD':
+      return {
+        ...state,
+        players: state.players.map((player, index) =>
+          index === state.currentPlayer ? { 
+            ...player, 
+            battlefield: action.card,
+            hand: player.hand.filter(c => c !== action.card)
+          } : player
+        )
+      };
+    case 'ATTACK':
+      const { attack } = action;
+      const attacker = state.players[state.currentPlayer].battlefield;
+      const defender = state.players[1 - state.currentPlayer].battlefield;
+      const damage = calculateDamage(attack, defender);
+      return {
+        ...state,
+        players: state.players.map((player, index) =>
+          index === 1 - state.currentPlayer ? { 
+            ...player, 
+            battlefield: { ...player.battlefield, hp: player.battlefield.hp - damage } 
+          } : player
+        )
+      };
+    case 'RECHARGE_ENERGY':
+      return {
+        ...state,
+        players: state.players.map((player, index) =>
+          index === state.currentPlayer ? { ...player, energy: player.energy + 1 } : player
         )
       };
     case 'PLAY_CARD':

@@ -78,3 +78,18 @@
     border-color: #32cd32;
     color: #32cd32;
 }
+
+.attack-button {
+    border: 2px solid;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.attack-button.sufficient-energy {
+    border-color: #32cd32;
+}
+
+.attack-button.insufficient-energy {
+    border-color: #ff4500;
+}

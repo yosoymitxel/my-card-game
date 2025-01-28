@@ -2,8 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faBolt, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
+import { useGame } from '../../contexts/GameContext';
 
-const Card = ({ card }) => {
+const Card = ({ card, isBattlefield }) => {
+  const { state, dispatch } = useGame();
+
+  const handleAttack = (attack) => {
+    dispatch({ type: 'ATTACK', attack });
+    dispatch({ type: 'SWITCH_TURN' });
+  };
+
   if (!card) return null;
 
   const {
@@ -32,8 +40,10 @@ const Card = ({ card }) => {
           <h3 className="text-sm font-bold">{name}</h3>
           <div className="attacks flex flex-wrap justify-between">
             {attacks.map((attack, index) => (
-              <div key={index} className="w-1/2">
-                <p><FontAwesomeIcon icon={faBolt} /> {attack.energy_required} | {attack.damage} {attack.name}</p>
+              <div key={index} className="w-full">
+                <p className={`attack-button ${state.players[state.currentPlayer].energy >= attack.energy_required ? 'sufficient-energy' : 'insufficient-energy'}`} onClick={() => isBattlefield && handleAttack(attack)}>
+                  <FontAwesomeIcon icon={faBolt} /> {attack.energy_required} | {attack.damage} {attack.name}
+                </p>
                 {attack.effect && <p>Efecto: {attack.effect}</p>}
               </div>
             ))}
@@ -70,7 +80,8 @@ Card.propTypes = {
     special_effects: PropTypes.arrayOf(PropTypes.string),
     usage: PropTypes.string,
     effect: PropTypes.string
-  })
+  }),
+  isBattlefield: PropTypes.bool
 };
 
 export default Card;
