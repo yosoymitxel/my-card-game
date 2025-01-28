@@ -15,6 +15,9 @@ const initialState = {
 };
 
 const gameReducer = (state, action) => {
+
+  console.log('Action:', action.type);
+
   switch (action.type) {
     case 'START_GAME':
       const player1Deck = initializeDeck(action.player1Type, cardsData);
@@ -60,17 +63,25 @@ const gameReducer = (state, action) => {
       console.log('Player 2 hand:', updatedState.players[1].hand);
       return updatedState;
     case 'SELECT_CARD':
+      if (!action.card) {
+        return state;
+      }
       const selectCardState = {
         ...state,
-        players: state.players.map((player, index) =>
-          index === state.currentPlayer ? { 
-            ...player, 
-            activeCard: action.card,
-            hand: player.hand.filter(c => c.id !== action.card.id)
-          } : player
-        )
+        players: state.players.map((player, index) => {
+          if (index === state.currentPlayer) {
+            const newHand = player.hand.filter(c => c.name !== action.card.name);
+            console.log('Filtered hand:', newHand);
+            return { 
+              ...player, 
+              activeCard: action.card,
+              hand: newHand
+            };
+          }
+          return player;
+        })
       };
-      console.log('Player 1 hand:', selectCardState.players[0].hand);
+      console.log('Player 1 hand actual:', selectCardState.players[0].hand);
       console.log('Player 2 hand:', selectCardState.players[1].hand);
       return selectCardState;
     case 'USE_CARD':
@@ -94,8 +105,8 @@ const gameReducer = (state, action) => {
           index === action.playerId ? { ...player, hand: [...player.hand] } : player
         )
       };
-      console.log('Player 1 hand:', reloadHandState.players[0].hand);
-      console.log('Player 2 hand:', reloadHandState.players[1].hand);
+      console.log('Player 1 hand 1:', reloadHandState.players[0].hand);
+      console.log('Player 2 hand 1:', reloadHandState.players[1].hand);
       return reloadHandState;
     case 'ATTACK':
       const { attack } = action;
@@ -103,14 +114,20 @@ const gameReducer = (state, action) => {
       const defender = state.players[1 - state.currentPlayer].activeCard;
       const damage = calculateDamage(attack, defender);
       const newHp = Math.max(defender.hp - damage, 0);
-      return {
-        ...state,
-        players: state.players.map((player, index) =>
-          index === 1 - state.currentPlayer ? { 
+      const updatedPlayers = state.players.map((player, index) => {
+        if (index === 1 - state.currentPlayer) {
+          return { 
             ...player, 
             activeCard: newHp > 0 ? { ...player.activeCard, hp: newHp } : null 
-          } : player
-        )
+          };
+        }
+        return player;
+      });
+      const nextTurnPlayer = newHp > 0 ? state.currentPlayer : 1 - state.currentPlayer;
+      return {
+        ...state,
+        currentPlayer: nextTurnPlayer,
+        players: updatedPlayers
       };
     case 'RECHARGE_ENERGY':
       return {
@@ -120,8 +137,21 @@ const gameReducer = (state, action) => {
         )
       };
     case 'PLAY_CARD':
-      // Lógica para jugar carta
-      return state;
+      const playCardState = {
+        ...state,
+        players: state.players.map((player, index) => {
+          if (index === state.currentPlayer) {
+            const newHand = player.hand.filter(c => c.id !== action.card.id);
+            return {
+              ...player,
+              activeCard: player.activeCard ? player.activeCard : action.card,
+              hand: newHand
+            };
+          }
+          return player;
+        })
+      };
+      return playCardState;
     case 'CLEAR_ERROR':
       return {
         ...state,

@@ -25,14 +25,8 @@ const Card = ({ card, isBattlefield }) => {
     }
   }, [card?.hp, currentHp, isBattlefield]);
 
-  useEffect(() => {
-    if (isBattlefield) {
-      dispatch({ type: 'REMOVE_CARD_FROM_HAND', card });
-    }
-  }, [isBattlefield, card, dispatch]);
-
   const handleAttack = (attack) => {
-    if (currentPlayer.energy >= attack.energy_required && opponentPlayer.battlefield) {
+    if (currentPlayer.energy >= attack.energy_required && opponentPlayer.activeCard) {
       dispatch({ type: 'ATTACK', attack });
       setTimeout(() => {
         dispatch({ type: 'SWITCH_TURN' });
@@ -71,7 +65,7 @@ const Card = ({ card, isBattlefield }) => {
           <div className="attacks flex flex-wrap justify-between">
             {attacks.map((attack, index) => (
               <div key={index} className="w-full">
-                <p className={`attack-button ${isBattlefield && isCurrentPlayerCard && currentPlayer.energy >= attack.energy_required && opponentPlayer.battlefield ? 'sufficient-energy' : 'insufficient-energy'}`} onClick={() => isBattlefield && isCurrentPlayerCard && handleAttack(attack)}>
+                <p className={`attack-button ${isBattlefield && isCurrentPlayerCard && currentPlayer.energy >= attack.energy_required && opponentPlayer.activeCard ? 'sufficient-energy' : 'insufficient-energy'}`} onClick={() => isBattlefield && isCurrentPlayerCard && handleAttack(attack)}>
                   <FontAwesomeIcon icon={faBolt} /> {attack.energy_required} | {attack.damage} {attack.name}
                 </p>
                 {attack.effect && <p>Efecto: {attack.effect}</p>}

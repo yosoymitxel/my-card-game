@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PlayerArea from '../PlayerArea/PlayerArea';
 import Card from '../Card/Card';
 import { useGame } from '../../contexts/GameContext';
@@ -6,6 +6,16 @@ import { useGame } from '../../contexts/GameContext';
 const Board = () => {
   const { state, dispatch } = useGame();
   const [energyRecharged, setEnergyRecharged] = useState(false);
+
+  const currentPlayer = state.players[state.currentPlayer];
+  const opponentPlayer = state.players[1 - state.currentPlayer];
+
+  useEffect(() => {
+    if (currentPlayer.activeCard && currentPlayer.activeCard.hp <= 0) {
+      dispatch({ type: 'SWITCH_TURN' });
+      setEnergyRecharged(false);
+    }
+  }, [currentPlayer.activeCard, dispatch]);
 
   const handleAttack = (attack) => {
     dispatch({ type: 'ATTACK', attack });
@@ -32,9 +42,6 @@ const Board = () => {
   const handleCloseError = () => {
     dispatch({ type: 'CLEAR_ERROR' });
   };
-
-  const currentPlayer = state.players[state.currentPlayer];
-  const opponentPlayer = state.players[1 - state.currentPlayer];
 
   return (
     <div className="game-board grid grid-cols-1 gap-4 p-4">
