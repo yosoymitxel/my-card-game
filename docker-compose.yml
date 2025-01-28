@@ -2,12 +2,10 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - "3000:3000" # Mapea el puerto interno del contenedor al externo
     volumes:
       - .:/app
       - /app/node_modules
-    stdin_open: true
-    tty: true
     environment:
       - NODE_ENV=development
-    command: npm run develop
+    command: npm run dev

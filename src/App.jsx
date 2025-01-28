@@ -1,18 +1,13 @@
 import React from 'react';
-import { GameProvider } from './contexts/GameContext';
-import GameModeSelector from './components/GameModeSelector/GameModeSelector';
-import Board from './components/Board/Board';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <GameProvider>
-      <div className="App">
-        <GameModeSelector />
-        <Board />
-      </div>
-    </GameProvider>
+    <div className="App">
+      <h1>React Card Game</h1>
+      <p>¡Bienvenido al juego de cartas!</p>
+    </div>
   );
-}
+};
 
 export default App;
