@@ -29,6 +29,10 @@ const Board = () => {
     }
   };
 
+  const handleCloseError = () => {
+    dispatch({ type: 'CLEAR_ERROR' });
+  };
+
   const currentPlayer = state.players[state.currentPlayer];
   const opponentPlayer = state.players[1 - state.currentPlayer];
 
@@ -73,6 +77,19 @@ const Board = () => {
 
       {/* Player 2 Area */}
       <PlayerArea playerId={1} />
+
+      {/* Error Modal */}
+      {state.error && (
+        <div className="error-modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-4 rounded-lg shadow-lg">
+            <h2 className="text-xl font-bold mb-4">Error</h2>
+            <p>{state.error}</p>
+            <button onClick={handleCloseError} className="mt-4 p-2 bg-red-500 text-white rounded">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

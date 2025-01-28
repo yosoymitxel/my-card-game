@@ -11,6 +11,7 @@ const initialState = {
     { id: 1, energy: 0, activeMonster: null, hand: [], deck: [], battlefield: null, energyRecharged: false }
   ],
   currentPlayer: 0,
+  error: null,
 };
 
 const initializeDeck = (type) => {
@@ -39,13 +40,27 @@ const gameReducer = (state, action) => {
       };
     case 'SWITCH_TURN':
       const currentPlayer = state.currentPlayer;
+      const currentPlayerHand = state.players[currentPlayer].hand;
+      if (currentPlayerHand.length >= 7) {
+        return {
+          ...state,
+          error: 'No puedes tener más de 7 cartas en la mano.'
+        };
+      }
       const newCard = state.players[currentPlayer].deck.pop();
+      if (!newCard) {
+        return {
+          ...state,
+          error: 'No hay más cartas en el mazo.'
+        };
+      }
       return { 
         ...state, 
         currentPlayer: 1 - currentPlayer,
         players: state.players.map((player, index) => 
           index === currentPlayer ? { ...player, hand: [...player.hand, newCard], energyRecharged: false } : player
-        )
+        ),
+        error: null
       };
     case 'SELECT_CARD':
       return {
@@ -83,6 +98,11 @@ const gameReducer = (state, action) => {
     case 'PLAY_CARD':
       // Lógica para jugar carta
       return state;
+    case 'CLEAR_ERROR':
+      return {
+        ...state,
+        error: null
+      };
     default:
       return state;
   }

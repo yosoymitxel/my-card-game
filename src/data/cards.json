@@ -1,363 +1,362 @@
 {
-    "types": ["Fuego", "Agua", "Tierra", "Eléctrico", "Oscuro"],
-    "cards": [
-      {
-        "name": "Dragón Ígneo",
-        "type": "Fuego",
-        "hp": 150,
-        "attacks": [
-          {
-            "name": "Llama Infernal",
-            "damage": 50,
-            "energy_required": 3
-          },
-          {
-            "name": "Explosión de Calor",
-            "damage": 70,
-            "energy_required": 4,
-            "effect": "El jugador pierde 1 energía después del ataque."
-          }
-        ],
-        "special_effects": [
-          "Hace +10 de daño si el oponente tiene más de 5 energías."
-        ]
-      },
-      {
-        "name": "Tortuga Marina",
-        "type": "Agua",
-        "hp": 180,
-        "attacks": [
-          {
-            "name": "Chorro de Agua",
-            "damage": 40,
-            "energy_required": 3
-          },
-          {
-            "name": "Maremoto",
-            "damage": 60,
-            "energy_required": 4,
-            "effect": "Reduce la energía del oponente en 1."
-          }
-        ],
-        "special_effects": [
-          "Hace +10 de daño si el oponente tiene más de 5 energías."
-        ]
-      },
-      {
-        "name": "Golem de Tierra",
-        "type": "Tierra",
-        "hp": 200,
-        "attacks": [
-          {
-            "name": "Golpe de Roca",
-            "damage": 30,
-            "energy_required": 2
-          },
-          {
-            "name": "Terremoto",
-            "damage": 50,
-            "energy_required": 4,
-            "effect": "El oponente pierde 2 energías."
-          }
-        ],
-        "special_effects": [
-          "Hace +10 de daño si el oponente tiene más de 5 energías."
-        ]
-      },
-      {
-        "name": "Rayo Eléctrico",
-        "type": "Eléctrico",
-        "hp": 120,
-        "attacks": [
-          {
-            "name": "Chispa",
-            "damage": 40,
-            "energy_required": 2
-          },
-          {
-            "name": "Tormenta Eléctrica",
-            "damage": 70,
-            "energy_required": 4,
-            "effect": "El oponente pierde 1 energía."
-          }
-        ],
-        "special_effects": [
-          "Hace +10 de daño si el oponente tiene más de 5 energías."
-        ]
-      },
-      {
-        "name": "Sombra Oscura",
-        "type": "Oscuro",
-        "hp": 140,
-        "attacks": [
-          {
-            "name": "Golpe Sombrío",
-            "damage": 50,
-            "energy_required": 3
-          },
-          {
-            "name": "Niebla Oscura",
-            "damage": 60,
-            "energy_required": 4,
-            "effect": "El oponente pierde 1 energía."
-          }
-        ],
-        "special_effects": [
-          "Hace +10 de daño si el oponente tiene más de 5 energías."
-        ]
-      },
-      {
-        "name": "Elixir Curativo",
-        "type": "Especial",
-        "usage": "Reutilizable",
-        "effect": "Cura 30 puntos de vida a un monstruo aliado."
-      },
-      {
-        "name": "Poción de Fuerza",
-        "type": "Especial",
-        "usage": "Reutilizable",
-        "effect": "Aumenta el daño de un ataque en 20 puntos."
-      },
-      {
-        "name": "Trampa de Energía",
-        "type": "Especial",
-        "usage": "Un solo uso",
-        "effect": "Reduce la energía del oponente en 2."
-      },
-      {
-        "name": "Escudo Protector",
-        "type": "Especial",
-        "usage": "Reutilizable",
-        "effect": "Reduce el daño recibido en 20 puntos durante un turno."
-      },
-      {
-        "name": "Trampa de Fuego",
-        "type": "Especial",
-        "usage": "Un solo uso",
-        "effect": "Inflige 30 puntos de daño al oponente."
-      },
-      {
-        "name": "Bestia Ardiente",
-        "type": "Fuego",
-        "hp": 140,
-        "attacks": [
-          {
-            "name": "Colmillos de Fuego",
-            "damage": 60,
-            "energy_required": 3
-          },
-          {
-            "name": "Tormenta de Cenizas",
-            "damage": 90,
-            "energy_required": 4,
-            "effect": "El jugador pierde 1 energía después del ataque."
-          }
-        ],
-        "special_effects": [
-          "Hace +20 de daño si el oponente tiene menos de 3 energías."
-        ]
-      },
-      {
-        "name": "Kraken Marino",
-        "type": "Agua",
-        "hp": 200,
-        "attacks": [
-          {
-            "name": "Tentáculos Gigantes",
-            "damage": 50,
-            "energy_required": 2
-          },
-          {
-            "name": "Ola Gigante",
-            "damage": 80,
-            "energy_required": 4,
-            "effect": "Reduce la energía del oponente en 2."
-          }
-        ],
-        "special_effects": [
-          "Recupera 10 puntos de vida al inicio de cada turno."
-        ]
-      },
-      {
-        "name": "Titán Rocoso",
-        "type": "Tierra",
-        "hp": 220,
-        "attacks": [
-          {
-            "name": "Impacto Pesado",
-            "damage": 60,
-            "energy_required": 3
-          },
-          {
-            "name": "Avalancha",
-            "damage": 100,
-            "energy_required": 5,
-            "effect": "Reduce en 2 el daño de todos los ataques del oponente durante un turno."
-          }
-        ],
-        "special_effects": [
-          "Hace +10 de daño por cada carta de tipo Tierra en tu equipo."
-        ]
-      },
-      {
-        "name": "Guerrero Relámpago",
-        "type": "Eléctrico",
-        "hp": 130,
-        "attacks": [
-          {
-            "name": "Descarga Rápida",
-            "damage": 30,
-            "energy_required": 1
-          },
-          {
-            "name": "Rayo Fulminante",
-            "damage": 70,
-            "energy_required": 3,
-            "effect": "El oponente pierde 1 energía por cada ataque exitoso."
-          }
-        ],
-        "special_effects": [
-          "Hace +15 de daño si el oponente es de tipo Agua."
-        ]
-      },
-      {
-        "name": "Espectro Sombrío",
-        "type": "Oscuro",
-        "hp": 160,
-        "attacks": [
-          {
-            "name": "Sombras Cortantes",
-            "damage": 50,
-            "energy_required": 2
-          },
-          {
-            "name": "Pesadilla",
-            "damage": 80,
-            "energy_required": 4,
-            "effect": "El oponente pierde 1 energía."
-          }
-        ],
-        "special_effects": [
-          "Hace +10 de daño por cada carta de tipo Oscuro en tu equipo."
-        ]
-      },
-      {
-        "name": "Ciclón de Energía",
-        "type": "Especial",
-        "usage": "Reutilizable",
-        "effect": "Recupera 2 energías a un monstruo aliado."
-      },
-      {
-        "name": "Explosión Helada",
-        "type": "Especial",
-        "usage": "Un solo uso",
-        "effect": "Inflige 40 puntos de daño al oponente y reduce su energía en 1."
-      },
-      {
-        "name": "Fénix Ardiente",
-        "type": "Fuego",
-        "hp": 170,
-        "attacks": [
-          {
-            "name": "Llamas Eternas",
-            "damage": 60,
-            "energy_required": 3
-          },
-          {
-            "name": "Resurrección Ígnea",
-            "damage": 0,
-            "energy_required": 5,
-            "effect": "Recupera 50 puntos de vida."
-          }
-        ],
-        "special_effects": [
-          "Hace +20 de daño si el oponente tiene más de 4 cartas en juego."
-        ]
-      },
-      {
-        "name": "Serpiente Marina",
-        "type": "Agua",
-        "hp": 160,
-        "attacks": [
-          {
-            "name": "Torbellino",
-            "damage": 50,
-            "energy_required": 3
-          },
-          {
-            "name": "Mordida Venenosa",
-            "damage": 40,
-            "energy_required": 2,
-            "effect": "El oponente pierde 1 energía al inicio de su turno."
-          }
-        ],
-        "special_effects": [
-          "Recupera 10 puntos de vida al inicio de cada turno si hay una carta de tipo Agua en tu equipo."
-        ]
-      },
-      {
-        "name": "Gigante de Granito",
-        "type": "Tierra",
-        "hp": 200,
-        "attacks": [
-          {
-            "name": "Aplastamiento",
-            "damage": 70,
-            "energy_required": 4
-          },
-          {
-            "name": "Muro de Roca",
-            "damage": 0,
-            "energy_required": 3,
-            "effect": "Reduce en 30 puntos el daño recibido durante un turno."
-          }
-        ],
-        "special_effects": [
-          "Hace +10 de daño por cada carta de tipo Tierra en juego."
-        ]
-      },
-      {
-        "name": "Guardián Eléctrico",
-        "type": "Eléctrico",
-        "hp": 140,
-        "attacks": [
-          {
-            "name": "Carga Estática",
-            "damage": 50,
-            "energy_required": 2
-          },
-          {
-            "name": "Campo Electromagnético",
-            "damage": 40,
-            "energy_required": 3,
-            "effect": "El oponente pierde 1 energía por cada ataque realizado este turno."
-          }
-        ],
-        "special_effects": [
-          "Hace +15 de daño si el oponente es de tipo Oscuro."
-        ]
-      },
-      {
-        "name": "Espíritu de las Sombras",
-        "type": "Oscuro",
-        "hp": 150,
-        "attacks": [
-          {
-            "name": "Toque Fantasmal",
-            "damage": 60,
-            "energy_required": 3
-          },
-          {
-            "name": "Espejismo Oscuro",
-            "damage": 0,
-            "energy_required": 2,
-            "effect": "Copia el último ataque usado por el oponente."
-          }
-        ],
-        "special_effects": [
-          "Hace +10 de daño por cada carta de tipo Oscuro en juego."
-        ]
-      }
-    ]
-  }
-  
+  "types": ["Fuego", "Agua", "Tierra", "Eléctrico", "Oscuro"],
+  "cards": [
+    {
+      "name": "Dragón Ígneo",
+      "type": "Fuego",
+      "hp": 150,
+      "attacks": [
+        {
+          "name": "Llama Infernal",
+          "damage": 50,
+          "energy_required": 3
+        },
+        {
+          "name": "Explosión de Calor",
+          "damage": 70,
+          "energy_required": 4,
+          "effect": "El jugador pierde 1 energía después del ataque."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño si el oponente tiene más de 5 energías."
+      ]
+    },
+    {
+      "name": "Tortuga Marina",
+      "type": "Agua",
+      "hp": 180,
+      "attacks": [
+        {
+          "name": "Chorro de Agua",
+          "damage": 40,
+          "energy_required": 3
+        },
+        {
+          "name": "Maremoto",
+          "damage": 60,
+          "energy_required": 4,
+          "effect": "Reduce la energía del oponente en 1."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño si el oponente tiene más de 5 energías."
+      ]
+    },
+    {
+      "name": "Golem de Tierra",
+      "type": "Tierra",
+      "hp": 200,
+      "attacks": [
+        {
+          "name": "Golpe de Roca",
+          "damage": 30,
+          "energy_required": 2
+        },
+        {
+          "name": "Terremoto",
+          "damage": 50,
+          "energy_required": 4,
+          "effect": "El oponente pierde 2 energías."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño si el oponente tiene más de 5 energías."
+      ]
+    },
+    {
+      "name": "Rayo Eléctrico",
+      "type": "Eléctrico",
+      "hp": 120,
+      "attacks": [
+        {
+          "name": "Chispa",
+          "damage": 40,
+          "energy_required": 2
+        },
+        {
+          "name": "Tormenta Eléctrica",
+          "damage": 70,
+          "energy_required": 4,
+          "effect": "El oponente pierde 1 energía."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño si el oponente tiene más de 5 energías."
+      ]
+    },
+    {
+      "name": "Sombra Oscura",
+      "type": "Oscuro",
+      "hp": 140,
+      "attacks": [
+        {
+          "name": "Golpe Sombrío",
+          "damage": 50,
+          "energy_required": 3
+        },
+        {
+          "name": "Niebla Oscura",
+          "damage": 60,
+          "energy_required": 4,
+          "effect": "El oponente pierde 1 energía."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño si el oponente tiene más de 5 energías."
+      ]
+    },
+    {
+      "name": "Elixir Curativo",
+      "type": "Especial",
+      "usage": "Reutilizable",
+      "effect": "Cura 30 puntos de vida a un monstruo aliado."
+    },
+    {
+      "name": "Poción de Fuerza",
+      "type": "Especial",
+      "usage": "Reutilizable",
+      "effect": "Aumenta el daño de un ataque en 20 puntos."
+    },
+    {
+      "name": "Trampa de Energía",
+      "type": "Especial",
+      "usage": "Un solo uso",
+      "effect": "Reduce la energía del oponente en 2."
+    },
+    {
+      "name": "Escudo Protector",
+      "type": "Especial",
+      "usage": "Reutilizable",
+      "effect": "Reduce el daño recibido en 20 puntos durante un turno."
+    },
+    {
+      "name": "Trampa de Fuego",
+      "type": "Especial",
+      "usage": "Un solo uso",
+      "effect": "Inflige 30 puntos de daño al oponente."
+    },
+    {
+      "name": "Bestia Ardiente",
+      "type": "Fuego",
+      "hp": 140,
+      "attacks": [
+        {
+          "name": "Colmillos de Fuego",
+          "damage": 60,
+          "energy_required": 3
+        },
+        {
+          "name": "Tormenta de Cenizas",
+          "damage": 90,
+          "energy_required": 4,
+          "effect": "El jugador pierde 1 energía después del ataque."
+        }
+      ],
+      "special_effects": [
+        "Hace +20 de daño si el oponente tiene menos de 3 energías."
+      ]
+    },
+    {
+      "name": "Kraken Marino",
+      "type": "Agua",
+      "hp": 200,
+      "attacks": [
+        {
+          "name": "Tentáculos Gigantes",
+          "damage": 50,
+          "energy_required": 2
+        },
+        {
+          "name": "Ola Gigante",
+          "damage": 80,
+          "energy_required": 4,
+          "effect": "Reduce la energía del oponente en 2."
+        }
+      ],
+      "special_effects": [
+        "Recupera 10 puntos de vida al inicio de cada turno."
+      ]
+    },
+    {
+      "name": "Titán Rocoso",
+      "type": "Tierra",
+      "hp": 220,
+      "attacks": [
+        {
+          "name": "Impacto Pesado",
+          "damage": 60,
+          "energy_required": 3
+        },
+        {
+          "name": "Avalancha",
+          "damage": 100,
+          "energy_required": 5,
+          "effect": "Reduce en 2 el daño de todos los ataques del oponente durante un turno."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño por cada carta de tipo Tierra en tu equipo."
+      ]
+    },
+    {
+      "name": "Guerrero Relámpago",
+      "type": "Eléctrico",
+      "hp": 130,
+      "attacks": [
+        {
+          "name": "Descarga Rápida",
+          "damage": 30,
+          "energy_required": 1
+        },
+        {
+          "name": "Rayo Fulminante",
+          "damage": 70,
+          "energy_required": 3,
+          "effect": "El oponente pierde 1 energía por cada ataque exitoso."
+        }
+      ],
+      "special_effects": [
+        "Hace +15 de daño si el oponente es de tipo Agua."
+      ]
+    },
+    {
+      "name": "Espectro Sombrío",
+      "type": "Oscuro",
+      "hp": 160,
+      "attacks": [
+        {
+          "name": "Sombras Cortantes",
+          "damage": 50,
+          "energy_required": 2
+        },
+        {
+          "name": "Pesadilla",
+          "damage": 80,
+          "energy_required": 4,
+          "effect": "El oponente pierde 1 energía."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño por cada carta de tipo Oscuro en tu equipo."
+      ]
+    },
+    {
+      "name": "Ciclón de Energía",
+      "type": "Especial",
+      "usage": "Reutilizable",
+      "effect": "Recupera 2 energías a un monstruo aliado."
+    },
+    {
+      "name": "Explosión Helada",
+      "type": "Especial",
+      "usage": "Un solo uso",
+      "effect": "Inflige 40 puntos de daño al oponente y reduce su energía en 1."
+    },
+    {
+      "name": "Fénix Ardiente",
+      "type": "Fuego",
+      "hp": 170,
+      "attacks": [
+        {
+          "name": "Llamas Eternas",
+          "damage": 60,
+          "energy_required": 3
+        },
+        {
+          "name": "Resurrección Ígnea",
+          "damage": 0,
+          "energy_required": 5,
+          "effect": "Recupera 50 puntos de vida."
+        }
+      ],
+      "special_effects": [
+        "Hace +20 de daño si el oponente tiene más de 4 cartas en juego."
+      ]
+    },
+    {
+      "name": "Serpiente Marina",
+      "type": "Agua",
+      "hp": 160,
+      "attacks": [
+        {
+          "name": "Torbellino",
+          "damage": 50,
+          "energy_required": 3
+        },
+        {
+          "name": "Mordida Venenosa",
+          "damage": 40,
+          "energy_required": 2,
+          "effect": "El oponente pierde 1 energía al inicio de su turno."
+        }
+      ],
+      "special_effects": [
+        "Recupera 10 puntos de vida al inicio de cada turno si hay una carta de tipo Agua en tu equipo."
+      ]
+    },
+    {
+      "name": "Gigante de Granito",
+      "type": "Tierra",
+      "hp": 200,
+      "attacks": [
+        {
+          "name": "Aplastamiento",
+          "damage": 70,
+          "energy_required": 4
+        },
+        {
+          "name": "Muro de Roca",
+          "damage": 0,
+          "energy_required": 3,
+          "effect": "Reduce en 30 puntos el daño recibido durante un turno."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño por cada carta de tipo Tierra en juego."
+      ]
+    },
+    {
+      "name": "Guardián Eléctrico",
+      "type": "Eléctrico",
+      "hp": 140,
+      "attacks": [
+        {
+          "name": "Carga Estática",
+          "damage": 50,
+          "energy_required": 2
+        },
+        {
+          "name": "Campo Electromagnético",
+          "damage": 40,
+          "energy_required": 3,
+          "effect": "El oponente pierde 1 energía por cada ataque realizado este turno."
+        }
+      ],
+      "special_effects": [
+        "Hace +15 de daño si el oponente es de tipo Oscuro."
+      ]
+    },
+    {
+      "name": "Espíritu de las Sombras",
+      "type": "Oscuro",
+      "hp": 150,
+      "attacks": [
+        {
+          "name": "Toque Fantasmal",
+          "damage": 60,
+          "energy_required": 3
+        },
+        {
+          "name": "Espejismo Oscuro",
+          "damage": 0,
+          "energy_required": 2,
+          "effect": "Copia el último ataque usado por el oponente."
+        }
+      ],
+      "special_effects": [
+        "Hace +10 de daño por cada carta de tipo Oscuro en juego."
+      ]
+    }
+  ]
+}

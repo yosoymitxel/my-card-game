@@ -8,12 +8,12 @@ const Card = ({ card, isBattlefield }) => {
   const { state, dispatch } = useGame();
   const currentPlayer = state.players[state.currentPlayer];
   const opponentPlayer = state.players[1 - state.currentPlayer];
-  const [hp, setHp] = useState(card?.hp || 0);
+  const [currentHp, setCurrentHp] = useState(card?.hp || 0);
 
   useEffect(() => {
-    if (isBattlefield && card?.hp !== hp) {
+    if (isBattlefield && card?.hp !== currentHp) {
       const interval = setInterval(() => {
-        setHp((prevHp) => {
+        setCurrentHp((prevHp) => {
           if (prevHp > card.hp) {
             return prevHp - 1;
           } else {
@@ -23,10 +23,16 @@ const Card = ({ card, isBattlefield }) => {
         });
       }, 50); // Slower animation
     }
-  }, [card?.hp, hp, isBattlefield]);
+  }, [card?.hp, currentHp, isBattlefield]);
+
+  useEffect(() => {
+    if (isBattlefield) {
+      dispatch({ type: 'REMOVE_CARD_FROM_HAND', card });
+    }
+  }, [isBattlefield, card, dispatch]);
 
   const handleAttack = (attack) => {
-    if (currentPlayer.energy >= attack.energy_required) {
+    if (currentPlayer.energy >= attack.energy_required && opponentPlayer.battlefield) {
       dispatch({ type: 'ATTACK', attack });
       setTimeout(() => {
         dispatch({ type: 'SWITCH_TURN' });
@@ -40,13 +46,16 @@ const Card = ({ card, isBattlefield }) => {
     image = 'https://i.pinimg.com/736x/1b/f3/45/1bf345371069447ff760bfcfd7cf91ba.jpg', // Generic card image
     name = 'Carta Genérica',
     type = 'Desconocido',
+    hp,
     attacks = [],
     special_effects = [],
     usage,
-    effect
+    effect,
+    owner
   } = card;
 
   const typeClass = type.toLowerCase();
+  const isCurrentPlayerCard = owner === state.currentPlayer;
 
   return (
     <div className={`card relative border border-gray-300 rounded-lg p-2 m-2 w-48 text-center ${typeClass}`}>
@@ -62,7 +71,7 @@ const Card = ({ card, isBattlefield }) => {
           <div className="attacks flex flex-wrap justify-between">
             {attacks.map((attack, index) => (
               <div key={index} className="w-full">
-                <p className={`attack-button ${isBattlefield && currentPlayer.energy >= attack.energy_required ? 'sufficient-energy' : 'insufficient-energy'}`} onClick={() => isBattlefield && handleAttack(attack)}>
+                <p className={`attack-button ${isBattlefield && isCurrentPlayerCard && currentPlayer.energy >= attack.energy_required && opponentPlayer.battlefield ? 'sufficient-energy' : 'insufficient-energy'}`} onClick={() => isBattlefield && isCurrentPlayerCard && handleAttack(attack)}>
                   <FontAwesomeIcon icon={faBolt} /> {attack.energy_required} | {attack.damage} {attack.name}
                 </p>
                 {attack.effect && <p>Efecto: {attack.effect}</p>}
@@ -100,7 +109,8 @@ Card.propTypes = {
     ),
     special_effects: PropTypes.arrayOf(PropTypes.string),
     usage: PropTypes.string,
-    effect: PropTypes.string
+    effect: PropTypes.string,
+    owner: PropTypes.number.isRequired
   }),
   isBattlefield: PropTypes.bool
 };
