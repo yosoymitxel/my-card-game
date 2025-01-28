@@ -7,6 +7,7 @@ import { GameProvider } from './contexts/GameContext';
 const App = () => {
   return (
     <GameProvider>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"></link>
       <div className="App">
         <h1>React Card Game</h1>
         <p>¡Bienvenido al juego de cartas!</p>
