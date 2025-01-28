@@ -38,26 +38,21 @@ const gameReducer = (state, action) => {
       const currentPlayer = state.currentPlayer;
       const nextPlayer = 1 - currentPlayer;
       const nextPlayerHand = state.players[nextPlayer].hand;
+      let error = null;
       if (nextPlayerHand.length >= 7) {
-        return {
-          ...state,
-          error: 'No puedes tener más de 7 cartas en la mano.'
-        };
+        error = 'No puedes tener más de 7 cartas en la mano.';
       }
       const newCard = state.players[nextPlayer].deck.pop();
       if (!newCard) {
-        return {
-          ...state,
-          error: 'No hay más cartas en el mazo.'
-        };
+        error = 'No hay más cartas en el mazo.';
       }
       const updatedState = { 
         ...state, 
         currentPlayer: nextPlayer,
         players: state.players.map((player, index) => 
-          index === nextPlayer ? { ...player, hand: [...player.hand, newCard], energyRecharged: false } : player
+          index === nextPlayer ? { ...player, hand: nextPlayerHand.length < 7 ? [...player.hand, newCard] : player.hand, energyRecharged: false } : player
         ),
-        error: null
+        error
       };
       console.log('Player 1 hand:', updatedState.players[0].hand);
       console.log('Player 2 hand:', updatedState.players[1].hand);
@@ -130,6 +125,9 @@ const gameReducer = (state, action) => {
         players: updatedPlayers
       };
     case 'RECHARGE_ENERGY':
+      if (!state.players[state.currentPlayer].activeCard) {
+        return state;
+      }
       return {
         ...state,
         players: state.players.map((player, index) =>
