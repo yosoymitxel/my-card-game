@@ -1,0 +1,20 @@
+.mode-selector {
+    text-align: center;
+    padding: 2rem;
+}
+
+.mode-selector button {
+    margin: 1rem;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.mode-selector button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}

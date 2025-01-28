@@ -1,0 +1,30 @@
+{
+    "deck1": [
+        {
+            "id": 1,
+            "name": "Dragón Ígneo",
+            "type": "fire",
+            "health": 150,
+            "energyCost": 3,
+            "damage": 40,
+            "effects": ["high_energy_damage"]
+        },
+        {
+            "id": 2,
+            "name": "Poción de Fuerza",
+            "type": "item",
+            "energyCost": 1,
+            "effects": ["one_time_use", "boost_damage"]
+        }
+        ],
+        "deck2": [
+        {
+            "id": 3,
+            "name": "Tortuga Marina",
+            "type": "water",
+            "health": 180,
+            "energyCost": 4,
+            "damage": 35
+        }
+    ]
+}
