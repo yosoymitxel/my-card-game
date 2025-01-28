@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '../Card/Card';
 import { useGame } from '../../contexts/GameContext';
 
 const PlayerArea = ({ playerId }) => {
   const { state, dispatch } = useGame();
   const player = state.players?.[playerId];
+  const [hoveredCardIndex, setHoveredCardIndex] = useState(null);
 
   useEffect(() => {
     console.log(`Player ${playerId + 1} hand:`, player?.hand);
@@ -27,9 +28,25 @@ const PlayerArea = ({ playerId }) => {
       <div className='hidden'>
         {player?.activeCard && <Card card={{ ...player.activeCard, owner: playerId }} isBattlefield />}
       </div>
-      <div className="hand grid grid-cols-3 gap-2 mt-4">
+      <div className="hand flex justify-center items-center mt-4 relative">
         {player?.hand?.filter(card => card && (!player.activeCard || card.name !== player.activeCard.name)).map((card, index) => (
-          <div key={index} onClick={() => handleCardClick(card)} className="cursor-pointer">
+          <div
+            key={index}
+            onClick={() => handleCardClick(card)}
+            onMouseEnter={() => setHoveredCardIndex(index)}
+            onMouseLeave={() => setHoveredCardIndex(null)}
+            className="cursor-pointer absolute"
+            style={{
+              transform: `rotate(${index * 10 - (player.hand.length - 1) * 5}deg)`,
+              transformOrigin: 'bottom center',
+              zIndex: hoveredCardIndex === index ? 100 : index,
+              marginLeft: `${index * 4}rem`,
+              transition: 'transform 0.3s, margin-left 0.3s',
+              ...(hoveredCardIndex !== null && hoveredCardIndex !== index && {
+                transform: `rotate(${index * 10 - (player.hand.length - 1) * 5}deg) translateX(${hoveredCardIndex < index ? '2rem' : '-2rem'})`
+              })
+            }}
+          >
             <Card card={{ ...card, owner: playerId }} />
           </div>
         ))}

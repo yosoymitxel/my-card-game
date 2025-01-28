@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faBolt } from '@fortawesome/free-solid-svg-icons';
 import { useGame } from '../../contexts/GameContext';
+import { motion } from 'framer-motion';
 
 const Card = ({ card, isBattlefield }) => {
   const { state, dispatch } = useGame();
@@ -52,7 +53,13 @@ const Card = ({ card, isBattlefield }) => {
   const isCurrentPlayerCard = owner === state.currentPlayer;
 
   return (
-    <div className={`card relative border border-gray-300 rounded-lg p-2 m-2 w-48 text-center ${typeClass}`}>
+    <motion.div
+      className={`card relative border border-gray-300 rounded-lg p-2 m-2 w-48 text-center ${typeClass}`}
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.2, zIndex: 100 }}
+      transition={{ duration: 0.3 }}
+    >
       <img className="w-44 h-64 object-cover rounded-lg" src={image} alt={name} />
       <div className="overlay absolute top-0 left-0 w-full h-full text-white text-xs flex flex-col justify-between p-2 box-border">
         <div className="top flex justify-between bg-black bg-opacity-50 p-1 rounded">
@@ -83,7 +90,7 @@ const Card = ({ card, isBattlefield }) => {
           {effect && <p>Efecto: {effect}</p>}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
