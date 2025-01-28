@@ -1,5 +1,4 @@
-// filepath: /c:/Users/Mitxel/Desktop/Proyectos de desarrollo/my-card-game/src/components/PlayerArea/PlayerArea.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '../Card/Card';
 import { useGame } from '../../contexts/GameContext';
 
@@ -7,13 +6,18 @@ const PlayerArea = ({ playerId }) => {
   const { state, dispatch } = useGame();
   const player = state.players?.[playerId];
 
+  useEffect(() => {
+    console.log(`Player ${playerId + 1} hand:`, player?.hand);
+  }, [player?.hand, playerId]);
+
   if (!player) {
     return <div className="player-area">Jugador no encontrado</div>;
   }
 
   const handleCardClick = (card) => {
-    if (state.currentPlayer === playerId && !player.battlefield) {
+    if (state.currentPlayer === playerId && !player.activeCard) {
       dispatch({ type: 'SELECT_CARD', card: { ...card, owner: playerId } });
+      dispatch({ type: 'RELOAD_HAND', playerId });
     }
   };
 
@@ -21,7 +25,7 @@ const PlayerArea = ({ playerId }) => {
     <div className={`player-area p-4 border-2 ${state.currentPlayer === playerId ? 'border-green-500 bg-green-100' : 'border-blue-500'} m-2 rounded-lg`}>
       <h2 className="text-xl font-bold">Jugador {playerId + 1}</h2>
       <div className="energy-counter text-lg">Energía: {player?.energy || 0}</div>
-      {player?.battlefield && <Card card={{ ...player.battlefield, owner: playerId }} isBattlefield />}
+      {player?.activeCard && <Card card={{ ...player.activeCard, owner: playerId }} isBattlefield />}
       <div className="hand grid grid-cols-3 gap-2 mt-4">
         {player?.hand?.map((card, index) => (
           <div key={index} onClick={() => handleCardClick(card)}>

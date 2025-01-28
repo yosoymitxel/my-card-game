@@ -16,14 +16,14 @@ const Board = () => {
   };
 
   const handleRecharge = () => {
-    if (!energyRecharged && currentPlayer.battlefield) {
+    if (!energyRecharged && currentPlayer.activeCard) {
       dispatch({ type: 'RECHARGE_ENERGY' });
       setEnergyRecharged(true);
     }
   };
 
   const handleEndTurn = () => {
-    if (currentPlayer.battlefield) {
+    if (currentPlayer.activeCard) {
       dispatch({ type: 'SWITCH_TURN' });
       setEnergyRecharged(false);
     }
@@ -51,19 +51,19 @@ const Board = () => {
         {/* Active Cards */}
         <div className="active-cards flex justify-center items-center min-h-48 mb-4">
           <div className="mx-4">
-            {opponentPlayer.battlefield && <Card card={opponentPlayer.battlefield} isBattlefield />}
+            {opponentPlayer.activeCard && <Card card={opponentPlayer.activeCard} isBattlefield />}
           </div>
           <div className="mx-4">
-            {currentPlayer.battlefield && <Card card={currentPlayer.battlefield} isBattlefield />}
+            {currentPlayer.activeCard && <Card card={currentPlayer.activeCard} isBattlefield />}
           </div>
         </div>
 
         {/* Action Buttons */}
         <div className="action-buttons flex gap-4 mb-4">
-          <button onClick={handleRecharge} className="p-2 bg-blue-500 text-white rounded" disabled={energyRecharged || !currentPlayer.battlefield || currentPlayer.energyRecharged}>
+          <button onClick={handleRecharge} className="p-2 bg-blue-500 text-white rounded" disabled={energyRecharged || !currentPlayer.activeCard || currentPlayer.energyRecharged}>
             Recargar Energía
           </button>
-          <button onClick={handleEndTurn} className="p-2 bg-red-500 text-white rounded" disabled={!currentPlayer.battlefield}>
+          <button onClick={handleEndTurn} className="p-2 bg-red-500 text-white rounded" disabled={!currentPlayer.activeCard}>
             Terminar Turno
           </button>
         </div>

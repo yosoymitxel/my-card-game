@@ -37,3 +37,13 @@ export const applyHealing = (card, target) => {
 export const rechargeEnergy = (player) => {
     player.energy = Math.min(player.energy + 1, player.maxEnergy);
 };
+
+export const initializeDeck = (type, cardsData) => {
+  const typeCards = cardsData.cards.filter(card => card.type.toLowerCase() === type.toLowerCase());
+  const specialCards = cardsData.cards.filter(card => card.type === 'Especial');
+  return [...typeCards.slice(0, 5), ...specialCards.slice(0, 5)];
+};
+
+export const dealInitialHand = (deck) => {
+  return deck.splice(0, 3);
+};

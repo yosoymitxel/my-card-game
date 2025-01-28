@@ -3,7 +3,10 @@ export const typeChart = {
     water: { strongAgainst: ['fire'], weakAgainst: ['grass'] },
     grass: { strongAgainst: ['water'], weakAgainst: ['fire'] },
     electric: { strongAgainst: ['water'], weakAgainst: ['ground'] },
-    ground: { strongAgainst: ['electric'], weakAgainst: ['water'] }
+    ground: { strongAgainst: ['electric'], weakAgainst: ['water'] },
+    dark: { strongAgainst: ['psychic'], weakAgainst: ['fairy'] },
+    fairy: { strongAgainst: ['dark'], weakAgainst: ['steel'] },
+    steel: { strongAgainst: ['fairy'], weakAgainst: ['fire'] }
 };
 
 export const checkTypeAdvantage = (attackerType, defenderType) => {
