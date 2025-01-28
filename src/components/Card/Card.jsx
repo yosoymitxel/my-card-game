@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faBolt } from '@fortawesome/free-solid-svg-icons';
@@ -8,11 +8,29 @@ const Card = ({ card, isBattlefield }) => {
   const { state, dispatch } = useGame();
   const currentPlayer = state.players[state.currentPlayer];
   const opponentPlayer = state.players[1 - state.currentPlayer];
+  const [hp, setHp] = useState(card?.hp || 0);
+
+  useEffect(() => {
+    if (isBattlefield && card?.hp !== hp) {
+      const interval = setInterval(() => {
+        setHp((prevHp) => {
+          if (prevHp > card.hp) {
+            return prevHp - 1;
+          } else {
+            clearInterval(interval);
+            return card.hp;
+          }
+        });
+      }, 50); // Slower animation
+    }
+  }, [card?.hp, hp, isBattlefield]);
 
   const handleAttack = (attack) => {
     if (currentPlayer.energy >= attack.energy_required) {
       dispatch({ type: 'ATTACK', attack });
-      dispatch({ type: 'SWITCH_TURN' });
+      setTimeout(() => {
+        dispatch({ type: 'SWITCH_TURN' });
+      }, 500); // Delay to show the animation
     }
   };
 
@@ -22,7 +40,6 @@ const Card = ({ card, isBattlefield }) => {
     image = 'https://i.pinimg.com/736x/1b/f3/45/1bf345371069447ff760bfcfd7cf91ba.jpg', // Generic card image
     name = 'Carta Genérica',
     type = 'Desconocido',
-    hp,
     attacks = [],
     special_effects = [],
     usage,
@@ -45,7 +62,7 @@ const Card = ({ card, isBattlefield }) => {
           <div className="attacks flex flex-wrap justify-between">
             {attacks.map((attack, index) => (
               <div key={index} className="w-full">
-                <p className={`attack-button ${currentPlayer.energy >= attack.energy_required ? 'sufficient-energy' : 'insufficient-energy'}`} onClick={() => isBattlefield && handleAttack(attack)}>
+                <p className={`attack-button ${isBattlefield && currentPlayer.energy >= attack.energy_required ? 'sufficient-energy' : 'insufficient-energy'}`} onClick={() => isBattlefield && handleAttack(attack)}>
                   <FontAwesomeIcon icon={faBolt} /> {attack.energy_required} | {attack.damage} {attack.name}
                 </p>
                 {attack.effect && <p>Efecto: {attack.effect}</p>}

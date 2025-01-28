@@ -11,4 +11,12 @@
     border-radius: 10px;
     padding: 20px;
     margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.battle-field .card-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
 }

@@ -9,20 +9,24 @@ const Board = () => {
 
   const handleAttack = (attack) => {
     dispatch({ type: 'ATTACK', attack });
-    dispatch({ type: 'SWITCH_TURN' });
-    setEnergyRecharged(false);
+    setTimeout(() => {
+      dispatch({ type: 'SWITCH_TURN' });
+      setEnergyRecharged(false);
+    }, 500); // Delay to show the animation
   };
 
   const handleRecharge = () => {
-    if (!energyRecharged) {
+    if (!energyRecharged && currentPlayer.battlefield) {
       dispatch({ type: 'RECHARGE_ENERGY' });
       setEnergyRecharged(true);
     }
   };
 
   const handleEndTurn = () => {
-    dispatch({ type: 'SWITCH_TURN' });
-    setEnergyRecharged(false);
+    if (currentPlayer.battlefield) {
+      dispatch({ type: 'SWITCH_TURN' });
+      setEnergyRecharged(false);
+    }
   };
 
   const currentPlayer = state.players[state.currentPlayer];
@@ -42,24 +46,20 @@ const Board = () => {
 
         {/* Active Cards */}
         <div className="active-cards flex justify-center items-center min-h-48 mb-4">
-          {opponentPlayer.battlefield && (
-            <div className="mx-4">
-              <Card card={opponentPlayer.battlefield} isBattlefield />
-            </div>
-          )}
-          {currentPlayer.battlefield && (
-            <div className="mx-4">
-              <Card card={currentPlayer.battlefield} isBattlefield />
-            </div>
-          )}
+          <div className="mx-4">
+            {opponentPlayer.battlefield && <Card card={opponentPlayer.battlefield} isBattlefield />}
+          </div>
+          <div className="mx-4">
+            {currentPlayer.battlefield && <Card card={currentPlayer.battlefield} isBattlefield />}
+          </div>
         </div>
 
         {/* Action Buttons */}
         <div className="action-buttons flex gap-4 mb-4">
-          <button onClick={handleRecharge} className="p-2 bg-blue-500 text-white rounded" disabled={energyRecharged}>
+          <button onClick={handleRecharge} className="p-2 bg-blue-500 text-white rounded" disabled={energyRecharged || !currentPlayer.battlefield || currentPlayer.energyRecharged}>
             Recargar Energía
           </button>
-          <button onClick={handleEndTurn} className="p-2 bg-red-500 text-white rounded">
+          <button onClick={handleEndTurn} className="p-2 bg-red-500 text-white rounded" disabled={!currentPlayer.battlefield}>
             Terminar Turno
           </button>
         </div>

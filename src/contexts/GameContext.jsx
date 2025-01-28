@@ -7,8 +7,8 @@ const GameContext = createContext();
 const initialState = {
   gameMode: null,
   players: [
-    { id: 0, energy: 0, activeMonster: null, hand: [], deck: [], battlefield: null },
-    { id: 1, energy: 0, activeMonster: null, hand: [], deck: [], battlefield: null }
+    { id: 0, energy: 0, activeMonster: null, hand: [], deck: [], battlefield: null, energyRecharged: false },
+    { id: 1, energy: 0, activeMonster: null, hand: [], deck: [], battlefield: null, energyRecharged: false }
   ],
   currentPlayer: 0,
 };
@@ -44,7 +44,7 @@ const gameReducer = (state, action) => {
         ...state, 
         currentPlayer: 1 - currentPlayer,
         players: state.players.map((player, index) => 
-          index === currentPlayer ? { ...player, hand: [...player.hand, newCard] } : player
+          index === currentPlayer ? { ...player, hand: [...player.hand, newCard], energyRecharged: false } : player
         )
       };
     case 'SELECT_CARD':
@@ -63,12 +63,13 @@ const gameReducer = (state, action) => {
       const attacker = state.players[state.currentPlayer].battlefield;
       const defender = state.players[1 - state.currentPlayer].battlefield;
       const damage = calculateDamage(attack, defender);
+      const newHp = Math.max(defender.hp - damage, 0);
       return {
         ...state,
         players: state.players.map((player, index) =>
           index === 1 - state.currentPlayer ? { 
             ...player, 
-            battlefield: { ...player.battlefield, hp: player.battlefield.hp - damage } 
+            battlefield: newHp > 0 ? { ...player.battlefield, hp: newHp } : null 
           } : player
         )
       };
@@ -76,7 +77,7 @@ const gameReducer = (state, action) => {
       return {
         ...state,
         players: state.players.map((player, index) =>
-          index === state.currentPlayer ? { ...player, energy: player.energy + 1 } : player
+          index === state.currentPlayer ? { ...player, energy: player.energy + 1, energyRecharged: true } : player
         )
       };
     case 'PLAY_CARD':
